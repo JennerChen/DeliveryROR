@@ -31,6 +31,10 @@ group :test do
 end
 #CSS 标题导航需要用到这个
 gem 'bootstrap-sass', '2.0.0'
+#------------------------------------------------
+#加密数据库密码
+gem 'bcrypt-ruby', '3.0.1'
+#--------------------------------------------------
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
