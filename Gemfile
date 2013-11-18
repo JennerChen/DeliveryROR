@@ -29,6 +29,8 @@ group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '1.1.2'
 end
+#CSS 标题导航需要用到这个
+gem 'bootstrap-sass', '2.0.0'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
