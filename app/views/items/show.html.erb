@@ -1,0 +1,37 @@
+<% provide(:title, 'Item Table') %>
+<h1>Item Detail</h1>
+ <table id="items" class="display">
+    <thead>
+      <tr>
+        <th>item_id</th>
+        <th>user_id</th>
+        <th>order_id</th>
+        <th>category</th>
+        <th>quantity</th>
+        <th>weight</th>
+        <th>price</th>
+        <th>describe</th>
+        <th>update_at</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+      <td><%= @item.id %></td>
+      <td><%= link_to(@item.user_id, "../users/#{@item.user_id}") %></td>
+      <td><%= link_to(@item.order_id, "../orders/#{@item.order_id}") %></td>
+      <td><%= Category.find_by_id(@item.category_id).name %></td>
+      <td><%= @item.quantity %></td>
+      <td><%= @item.weight %></td>
+      <td><%= number_to_currency(@item.price, unit: 'Euro', format: "%n %u") %></td>
+      <td><% if @item.describe %>
+          <%= @item.describe %>
+          <% else %>
+          None
+          <% end %>
+      </td>
+      <td><%= @item.updated_at.strftime("%B %e, %Y") %></td>
+      
+      
+      </tr>
+    </tbody>
+  </table>   

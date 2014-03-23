@@ -1,0 +1,11 @@
+   <tr>
+      <td><%= link_to(user.id, user) %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.role %></td>
+      <td><%= link_to('all his orders', user)%>
+      <td><%= link_to('edit', "../users/#{user.id}/edit") %></td>
+     
+   </tr>
+
+  

@@ -1,0 +1,85 @@
+<!-- 这里要注意，需要加2个点，指明是上一级目录 -->
+<%= form_tag('../order') do %>
+  <p>
+  	Please input an order id:
+
+    <%= text_field_tag 'orderid', :order_id, :placeholder => "input an order id" %>
+    <%= submit_tag "Search!", :name => nil, class: "btn btn-large btn-primary" %>
+  </p>
+<% end %>
+  <table id="orders" class="display">
+    <thead>
+      <tr>
+        <th>order_id</th>
+        <th>dst_id</th>
+        <th>price</th>
+        <th>statement</th>
+        <th>generated date</th>
+        <% if current_user && current_user.role == 'admin' %>
+        <th>edit</th>
+        <% end %>
+      </tr>
+    <thead>
+    <tbody>
+      <%= render @orders %>
+    </tbody>
+  </table>   
+
+
+
+
+
+<!-- 
+
+ <table id="orders" class="display">
+  <thead>
+    <tr>
+      <th>order_id</th>
+      <th>dst_id</th>
+      <th>price</th>
+      <th>statement</th>
+      <th>date</th>
+     
+    </tr>
+  <thead>
+   <tbody>
+    <% @orders.each do |order| %>
+
+    <tr>
+      <td><%= link_to(order.id, order) %></td>
+      <td><%= link_to(order.destination_id, "../destinations/#{order.destination_id}") %></td>
+      <td><%= number_to_currency(order.price, unit: 'Euro', format: "%n %u") %></td>
+      <td><%= order.state %></td>
+      <td><%= order.created_at.strftime("%B %e, %Y") %></td>
+     
+      
+    </tr>
+
+    <% end %>
+  <tbody> 
+</table>   -->   
+  
+<!-- 
+ <table id="orders">
+<thead>
+  <tr>
+    <th>Order id</th>
+    <th>Dst</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>statement</th>
+  </tr>
+</thead>
+<tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= link_to(order.id, order) %></td>
+      <td><%= order.destination_id %></td>
+      <td><%= order.created_at.strftime("%B %e, %Y") %></td>
+      <td><%= number_to_currency(order.price) %></td>
+      <td><%= order.state %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+    

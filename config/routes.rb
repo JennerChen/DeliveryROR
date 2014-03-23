@@ -1,7 +1,21 @@
 Delivery::Application.routes.draw do
-  
+  resources :users 
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :orders
+  resources :destinations
+  resources :items
+  resources :categories
+
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete  
+  match '/order',  to: 'staticPages#create', via: :post
+  match '/neworder', to: 'orders#new'
+  match '/urltable', to: 'staticPages#manage'
+
+  mount Ship::Base => "/ws"
+  # mount Ship::WEB_v2 => "/web"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,42 @@
+<% provide(:title, 'New Order') %>
+<h1>Confirm Order</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= form_for(@order) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+      <% if current_user.role == 'admin' %>
+      <%= f.label :destination_id, 'start' %><br />
+      <%= f.collection_select(:destination_id, Destination.all, :id, :start ) %>
+      <%= f.label :destination_id, 'destination' %><br />
+      <%= f.collection_select(:destination_id, Destination.all, :id, :dst ) %>
+      <% else %>
+      <%= f.label :destination_id %>
+      From <%= Destination.find_by_id(@order.destination_id).start %> to 
+      <%= Destination.find_by_id(@order.destination_id).dst %>
+      <% end %>
+      <br/>
+
+      <%= f.label :state, 'state' %>
+      <%= f.radio_button :state, 'In_Stock', :checked => true %> In_Stock
+      <% if current_user.role =='admin' || current_user.role == 'carrier' %>
+      <%= f.radio_button :state, 'Dispatching' %>Dispatching
+      <%= f.radio_button :state, 'Dispatched' %>Dispatched
+      <%= f.radio_button :state, 'Complete' %>Complete
+      <% end %>
+      <br />
+
+      <%= f.label :price %> 
+      <% if current_user.role=='admin' %>
+      <%= f.number_field :price %>
+      <% else %>
+      <%= @order.price %>EUR
+      <%= f.hidden_field :price %>
+      <% end %>
+     
+    <br><br>
+      <%= f.submit "Confirm", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

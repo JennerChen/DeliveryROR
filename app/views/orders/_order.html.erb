@@ -1,0 +1,15 @@
+
+   
+
+    <tr>
+      <td><%= link_to(order.id, order) %></td>
+      <td><%= link_to(order.destination_id, "../destinations/#{order.destination_id}") %></td>
+      <td><%= number_to_currency(order.price, unit: 'Euro', format: "%n %u") %></td>
+      <td><%= order.state %></td>
+      <td><%= order.created_at.strftime("%B %e, %Y") %></td>
+      <% if current_user && current_user.role =='admin' %>
+      <td><%= link_to('edit', "../orders/#{order.id}/edit") %></td>
+      <% end %>
+    </tr>
+
+  

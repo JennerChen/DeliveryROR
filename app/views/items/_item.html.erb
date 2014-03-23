@@ -1,0 +1,13 @@
+ <tr>
+      <td><%= link_to(item.id, item) %></td>
+      <td><%= link_to(item.user_id, "../users/#{item.user_id}") %></td>
+      <td><%= link_to(item.order_id, "../orders/#{item.order_id}") %></td>
+      <td><%= link_to(item.category_id, "../categories/#{item.category_id}") %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.weight %></td>
+      <td><%= number_to_currency(item.price, unit: 'Euro', format: "%n %u") %></td>
+      <td><%= item.describe %></td>
+      <td><%= item.updated_at.strftime("%B %e, %Y") %></td>
+     
+      
+ </tr>

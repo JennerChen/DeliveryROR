@@ -1,0 +1,9 @@
+ <tr>
+      <td><%= link_to(category.id, category) %></td>
+      <td><%= category.name %></td>
+      <td><%= number_to_currency(category.price, unit: 'Euro', format: "%n %u") %></td>
+      
+      <td><%= category.updated_at.strftime("%B %e, %Y") %></td>
+     
+      
+ </tr>

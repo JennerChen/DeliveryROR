@@ -5,8 +5,14 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
+gem 'pg'
+gem 'rails_12factor'
+gem 'grape'
+gem 'grape-entity'
+gem  'roar-rails'
+gem 'will_paginate'
+gem 'grape-kaminari'
+gem 'grape-rails-cache'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,9 +24,11 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-ui-rails'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0.0'
 group :development, :test do
   gem 'rspec-rails', '2.10.0'
 end
@@ -35,6 +43,9 @@ gem 'bootstrap-sass', '2.0.0'
 #加密数据库密码
 gem 'bcrypt-ruby', '3.0.1'
 #--------------------------------------------------
+#API 文档支持
+gem 'grape-swagger', '0.7.2'
+#------------------------------------------------
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -49,3 +60,4 @@ gem 'bcrypt-ruby', '3.0.1'
 
 # To use debugger
 # gem 'debugger'
+ 

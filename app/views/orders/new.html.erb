@@ -1,0 +1,24 @@
+<% provide(:title, 'New Order') %>
+<h1>New Order</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= form_for(@order) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :destination_id, 'start' %><br />
+      <%= f.collection_select(:destination_id, Destination.all, :id, :start ) %>
+      <%= f.label :destination_id, 'to' %><br />
+      <%= f.collection_select(:destination_id, Destination.all, :id, :dst ) %>
+    <br><br>
+      <%= f.submit "Create new order", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+
+      
+      
+
+     
+      

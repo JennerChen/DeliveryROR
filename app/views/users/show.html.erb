@@ -1,0 +1,30 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <% if @user.orders.any? %> 
+  <table id="myorders" class="display">
+    <thead>
+    <tr>
+      <th>order_id</th>
+      <th>dst_id</th>
+      <th>price</th>
+      <th>statement</th>
+      <th>date</th>
+      <% if current_user && current_user.role == 'admin' %>
+      <th>edit</th>
+      <% end %>
+    </tr>
+    <thead>
+    <tbody>
+      <%= render @orders %>
+    </tbody>
+  </table>     
+  <% end %>
+</div> 

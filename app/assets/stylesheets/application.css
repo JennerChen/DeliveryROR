@@ -7,7 +7,10 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *
  *= require_self
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/jquery.dataTables
  *= require_tree .
+ *= require dataTables/src/demo_table_jui
  */

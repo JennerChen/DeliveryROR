@@ -1,0 +1,25 @@
+<% provide(:title, 'New Destination Setting') %>
+<h1>New Destination Setting</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= form_for(@destination) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :start %>
+      <%= f.text_field :start %>
+
+      <%= f.label :dstination %>
+      <%= f.text_field :dst %>
+
+      <%= f.label :price %>
+      <%= f.number_field :price %>
+    <br><br>
+      <%= f.submit "Create new price for destination", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+      
+      
+  
+   

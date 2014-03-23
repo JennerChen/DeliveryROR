@@ -1,0 +1,10 @@
+ <tr>
+      <td><%= link_to(destination.id, destination) %></td>
+      <td><%= destination.start %></td>
+      <td><%= destination.dst %></td>
+      <td><%= number_to_currency(destination.price, unit: 'Euro', format: "%n %u") %></td>
+      
+      <td><%= destination.updated_at.strftime("%B %e, %Y") %></td>
+
+      
+ </tr>

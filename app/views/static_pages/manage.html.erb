@@ -1,2 +1,12 @@
-<h1>StaticPages#manage</h1>
-<p>Find me in app/views/static_pages/manage.html.erb</p>
+<% provide(:title, 'Manage') %>
+<div class="row">
+<aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for current_user %>
+        <%= current_user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
