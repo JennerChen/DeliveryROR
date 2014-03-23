@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :role, inclusion: { in: 
                      ['admin', 'carrier','customer']}
-  validates :telephone, length: { in: 6..15 }
+  # validates :telephone, length: { in: 6..15 }
   
 end
