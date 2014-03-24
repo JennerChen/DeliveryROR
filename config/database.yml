@@ -1,23 +1,23 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: project_development
+  database: api
   pool: 5
   username: postgres
-  password: 65345021
+  password: 1234567
 
 test: &TEST
   adapter: postgresql
   encoding: utf8
-  database: project_test
+  database: api
   pool: 5
   username: postgres
-  password: 65345021  
+  password: 1234567  
 
 production:
   adapter: postgresql
   encoding: utf8
-  database: project_production
+  database: api
   pool: 5
   username: postgres
-  password: 65345021
+  password: 1234567

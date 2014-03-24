@@ -13,9 +13,8 @@ Delivery::Application.routes.draw do
   match '/order',  to: 'staticPages#create', via: :post
   match '/neworder', to: 'orders#new'
   match '/urltable', to: 'staticPages#manage'
-
+  match '/static_pages/home', to: 'static_pages#home'
   mount Ship::Base => "/ws"
-  # mount Ship::WEB_v2 => "/web"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
