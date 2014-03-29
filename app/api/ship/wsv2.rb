@@ -14,6 +14,8 @@ module Ship
         get :hello do
             { hello: "hello from v2, please use v1, ALL V2 function are not avaible now"}
         end
+
+        add_swagger_documentation :base_path => '/ws', :api_version => "v2"
     end
 
 end

@@ -10,6 +10,6 @@ module Ship
     route :any, '*path' do
         error!("Move along now, nothing to see here", 404)
     end
-    add_swagger_documentation  :base_path => '/ws'
+    # add_swagger_documentation  :base_path => '/ws'
   end
 end

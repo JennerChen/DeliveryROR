@@ -410,7 +410,8 @@ module Ship
                             'Detail' => "Invalid params for item, please check"}, 404) 
                 end
             end
-
         end
+        add_swagger_documentation :base_path => '/ws', :api_version => "v1"
+
 	end
 end
