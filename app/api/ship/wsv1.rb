@@ -205,7 +205,7 @@ module Ship
                             @order.state='Nonactivated'
                             if @order.save
                                 status 200
-                                 @order
+                                @order
                             else
                                 error!( {'Error' => 'Invalid parameters', 
                                     'Detail' => "please check your parameters"}, 404)
@@ -239,13 +239,13 @@ module Ship
                 @orders=[]
                 if params[:searchtype] && params[:searchvalue]
                     if params[:searchtype] == "receiverfirstname"
-                        @orders=Order.all.select{ |order| order.receiverfirstname == params[:receiverfirstname]}
+                        @orders=Order.all.select{ |order| order.receiverfirstname == params[:searchvalue]}
                     elsif params[:searchtype] == "receiversecondname"
-                        @orders=Order.all.select{ |order| order.receiversecondname == params[:receiversecondname]}
+                        @orders=Order.all.select{ |order| order.receiversecondname == params[:searchvalue]}
                     elsif params[:searchtype] == "state"
-                        @orders=Order.all.select{ |order| order.state == params[:state]}
+                        @orders=Order.all.select{ |order| order.state == params[:searchvalue]}
                     elsif params[:searchtype] == "iscomplete"
-                        @orders=Order.all.select{ |order| order.iscomplete == params[:iscomplete]}
+                        @orders=Order.all.select{ |order| order.iscomplete == params[:searchvalue]}
                     else
                         error!( {'Error' => ' service is not available', 
                             'Detail' => "sorry, the searchtype #{params[:searchtype]} is not available"}, 404)
@@ -267,6 +267,7 @@ module Ship
                 @order.destination_id= params[:destination_id]
                 @order.user_id = current_user.id
                 @order.state='Nonactivated'
+                @order.price=0
                 if @order.save
                     status 200
                     present @order, with: Entities::Orderentity
@@ -310,6 +311,10 @@ module Ship
                             if @order.save
                                status 200
                               present @order, with: Entities::Orderentity
+                            else 
+                                error!( {'Error' => 'error', 
+                            'Detail' => "please check"}, 404)
+                            
                             end
                         else
                             error!( {'Error' => 'Invalid user', 
