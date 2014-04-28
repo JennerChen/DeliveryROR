@@ -21,7 +21,7 @@
       <td><%= number_to_currency(@order.price, unit: 'Euro', format: "%n %u") %></td>
       <td><%= @order.state %></td>
       <td><%= @order.created_at.strftime("%B %e, %Y") %></td>
-      <td><%= Payment_notification.find_by_id(@order.paymentid).transcation_id if @order.paymentid %></td>
+      <td><%= PaymentNotification.find_by_id(@order.paymentid).transcation_id if @order.paymentid %></td>
       <% if current_user && current_user.role == 'admin' %>
       <td><%= link_to('edit', "../orders/#{@order.id}/edit") %>
       <% end %>
