@@ -30,15 +30,24 @@ class OrdersController < ApplicationController
 
   def create
   	 @order = current_user.orders.build(params[:order])
+     @fromlocation = Location.new(:address => params[:order][:fromlocation])
+     @tolocation = Location.new( :address => params[:order][:tolocation])
+     if @fromlocation.save && @tolocation.save 
+     @order.fromlocation = @fromlocation.id
+     @order.tolocation = @tolocation.id
+     
+     distance = @fromlocation.distance_from([@tolocation.latitude, @tolocation.longitude]).to_i
+     @order.price = distance /100
       #All of new orders state is In_Stock
      @order.state='In_Stock'
-     @order.price= Destination.find(@order.destination_id).price
+     # @order.price= Destination.find(@order.destination_id).price
     if @order.save
       flash[:success] = "Order has created!, please input information of goods"
       @item=Item.new
       render '/items/new'
     else
       render 'static_pages/home'
+    end
     end
   end
 
@@ -54,8 +63,8 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       if @order.update_attributes(params[:order])
         flash[:success] = "Order successfully generated"
-                
-        redirect_to @order  
+        redirect_to paypal_url(orders_url+"/#{@order.id}", payment_notifications_url)
+        # redirect_to @order  
       else
         render 'edit'    
 
@@ -65,4 +74,23 @@ class OrdersController < ApplicationController
   def destroy
     
   end
+
+
+  def paypal_url(return_url, notify_url)
+  values = {
+    :business => 'Jenner332-facilitator@gmail.com',
+    :cmd => '_xclick',
+    :upload => 1,
+    :return => return_url,
+    :invoice => @order.id,
+    :notify_url => notify_url
+  }
+ 
+    values.merge!({
+      "amount" => @order.price,
+      "item_name" => 'Online Order',
+      "item_number" => @order.id
+    })
+  "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+end
 end

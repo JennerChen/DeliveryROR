@@ -13,7 +13,7 @@ gem  'roar-rails'
 gem 'will_paginate'
 gem 'grape-kaminari'
 gem 'grape-rails-cache'
-
+gem 'geocoder'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

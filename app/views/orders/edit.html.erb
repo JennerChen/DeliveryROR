@@ -7,14 +7,17 @@
     <%= form_for(@order) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
       <% if current_user.role == 'admin' %>
-      <%= f.label :destination_id, 'start' %><br />
-      <%= f.collection_select(:destination_id, Destination.all, :id, :start ) %>
-      <%= f.label :destination_id, 'destination' %><br />
-      <%= f.collection_select(:destination_id, Destination.all, :id, :dst ) %>
+      <%= f.label :fromlocation, 'your address' %><br />
+      <%=  Location.find_by_id(@order.fromlocation).address %><br/>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{Location.find_by_id(@order.fromlocation).latitude}%2C#{Location.find_by_id(@order.fromlocation).longitude}" %>
+      <%= f.label :tolocation, 'receiver address' %><br />
+      <%=  Location.find_by_id(@order.tolocation).address %><br/>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{Location.find_by_id(@order.tolocation).latitude}%2C#{Location.find_by_id(@order.tolocation).longitude}" %>
       <% else %>
-      <%= f.label :destination_id %>
-      From <%= Destination.find_by_id(@order.destination_id).start %> to 
-      <%= Destination.find_by_id(@order.destination_id).dst %>
+      <%= f.label :fromlocation, 'your address' %><br />
+      <%=  Location.find_by_id(@order.fromlocation).address %><br/>
+      <%= f.label :tolocation, 'receiver address' %><br />
+      <%=  Location.find_by_id(@order.tolocation).address %><br>
       <% end %>
       <br/>
 
@@ -34,9 +37,19 @@
       <%= @order.price %>EUR
       <%= f.hidden_field :price %>
       <% end %>
-     
+      <br/>
+      You can add more detail for your order now<br />
+      <%= f.label :receiverfirstname %>
+      <%= f.text_field :receiverfirstname %>
+      <%= f.label :receiversecondname%>
+      <%= f.text_field :receiversecondname %>
+      <%= f.label :receiveraddress, 'receiver full address' %>
+      <%= f.text_field :receiveraddress %>
+      <%= f.label :receivertel, 'receiver telephone' %>
+      <%= f.text_field :receivertel %>
+
     <br><br>
-      <%= f.submit "Confirm", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Pay now", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>

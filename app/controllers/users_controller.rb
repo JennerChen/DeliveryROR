@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def edit
       @user = User.find(params[:id])
-      unless @user == current_user
+      unless @user == current_user || current_user.role =='admin'
         flash[:error]='Sorry, only signed in person can edit his profile'
         redirect_to '/signin'
       end

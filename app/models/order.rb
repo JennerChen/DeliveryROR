@@ -1,8 +1,8 @@
 class Order < ActiveRecord::Base
-  attr_accessible :destination_id, :price, :state, :nowlocation, :receiverfirstname, :receiversecondname, :receiveraddress, :receivertel, :receivemethod, :iscomplete
+  attr_accessible :destination_id, :price, :state, :nowlocation, :receiverfirstname, :receiversecondname, :receiveraddress, :receivertel, :receivemethod, :iscomplete, :fromlocation, :tolocation, :paymentid
   
   belongs_to :user    
-  belongs_to :destination
+  # belongs_to :destination
   has_many :items, dependent: :destroy
 
   validates :user_id, presence: true
@@ -11,4 +11,6 @@ class Order < ActiveRecord::Base
   validates :state, inclusion: { in: 
                      ['Dispatching', 'Dispatched','Complete','In_Stock','Nonactivated']}
   default_scope order: 'orders.created_at DESC'
+
+  
 end

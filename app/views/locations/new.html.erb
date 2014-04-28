@@ -1,0 +1,19 @@
+<% provide(:title, 'New location') %>
+<h1>New location</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= form_for(@location) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :address, 'receiver address' %><br />
+      <%= f.text_field :address %>
+      <%= f.label :latitude, 'latitude' %><br />
+      <%= f.text_field :latitude %>
+      <%= f.label :longitude, 'longitude' %><br />
+      <%= f.text_field :longitude %>
+    <br><br>
+      <%= f.submit "comfirm", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

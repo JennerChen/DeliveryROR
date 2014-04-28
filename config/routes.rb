@@ -5,7 +5,8 @@ Delivery::Application.routes.draw do
   resources :destinations
   resources :items
   resources :categories
-
+  resources :locations
+  resources :payment_notifications
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

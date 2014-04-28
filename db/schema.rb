@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140309001604) do
+ActiveRecord::Schema.define(:version => 20140427234830) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20140309001604) do
 
   add_index "items", ["user_id", "order_id", "category_id"], :name => "index_items_on_user_id_and_order_id_and_category_id"
 
+  create_table "locations", :force => true do |t|
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "destination_id"
@@ -74,9 +82,21 @@ ActiveRecord::Schema.define(:version => 20140309001604) do
     t.string   "receivertel"
     t.string   "receivemethod"
     t.boolean  "iscomplete"
+    t.integer  "fromlocation"
+    t.integer  "tolocation"
+    t.integer  "paymentid"
   end
 
   add_index "orders", ["user_id", "created_at"], :name => "index_orders_on_user_id_and_created_at"
+
+  create_table "payment_notifications", :force => true do |t|
+    t.text     "params"
+    t.integer  "order_id"
+    t.string   "status"
+    t.string   "transcation_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
