@@ -63,7 +63,8 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       if @order.update_attributes(params[:order])
         flash[:success] = "Order successfully generated"
-        redirect_to paypal_url(orders_url+"/#{@order.id}", payment_notifications_url)
+         redirect_to paypal_url(paypal_backs_url, payment_notifications_url)
+        # redirect_to paypal_url("http://www.google.com", payment_notifications_url)
         # redirect_to @order  
       else
         render 'edit'    
@@ -77,6 +78,7 @@ class OrdersController < ApplicationController
 
 
   def paypal_url(return_url, notify_url)
+    # paypal 的return url 是使用post方法的，这里需要解决这个问题
   values = {
     :business => 'Jenner332-facilitator@gmail.com',
     :cmd => '_xclick',

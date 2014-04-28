@@ -7,6 +7,7 @@ Delivery::Application.routes.draw do
   resources :categories
   resources :locations
   resources :payment_notifications
+  resources :paypal_backs, only: [:create]
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
