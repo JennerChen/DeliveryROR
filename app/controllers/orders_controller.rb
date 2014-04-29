@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
      @order.tolocation = @tolocation.id
      
      distance = @fromlocation.distance_from([@tolocation.latitude, @tolocation.longitude]).to_i
-     @order.price = distance /100
+     @order.price = distance /20
       #All of new orders state is In_Stock
      @order.state='In_Stock'
      # @order.price= Destination.find(@order.destination_id).price

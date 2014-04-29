@@ -259,15 +259,26 @@ module Ship
             desc "create a new order"
             params do
                 requires :token, :type => String, :desc =>"access token"
-                requires :destination_id, :type => Integer, :desc => "destination id"
+                requires :fromlocation, :type => String, :desc => "from location"
+                requires :tolocation, :type => String, :desc => "to location"
+                # requires :destination_id, :type => Integer, :desc => "destination id"
             end
             post do
                 authenticate!
                 @order=Order.new
-                @order.destination_id= params[:destination_id]
+                @fromlocation = Location.new(:address => params[:fromlocation])
+                @tolocation = Location.new( :address => params[:tolocation])
+                if @fromlocation.save && @tolocation.save 
+                    @order.fromlocation = @fromlocation.id
+                    @order.tolocation = @tolocation.id
+     
+                    distance = @fromlocation.distance_from([@tolocation.latitude, @tolocation.longitude]).to_i
+                    @order.price = distance /20
+                end
+                # @order.destination_id= params[:destination_id]
                 @order.user_id = current_user.id
                 @order.state='Nonactivated'
-                @order.price=0
+                # @order.price=0
                 if @order.save
                     status 200
                     present @order, with: Entities::Orderentity
@@ -293,6 +304,7 @@ module Ship
                     optional :receivertel, :type => String, :desc => "reciver telephone"
                     optional :receivemethod, :type => String, :desc => "reciver method"
                     optional :iscomplete, :type => Boolean, :desc => "order if complete"
+                    optional :paymentid, :type => String, :desc => "android order payment id"
                 end
                 put do
                     authenticate!
@@ -308,6 +320,16 @@ module Ship
                             @order.receivertel= params[:receivertel] if params[:receivertel]
                             @order.receivemethod= params[:receivemethod] if params[:receivemethod]
                             @order.iscomplete= params[:iscomplete] if params[:iscomplete]
+                            if params[:paymentid]
+                                @payment = PaymentNotification.new
+                                @payment.order_id = params[:id]
+                                @payment.status = "Completed"
+                                @payment.transcation_id = "Android Online: #{params[:paymentid]}"
+                                if @payment.save 
+                                   @order.paymentid = @payment.id
+                                end
+                            end
+                            
                             if @order.save
                                status 200
                               present @order, with: Entities::Orderentity
