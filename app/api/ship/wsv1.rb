@@ -273,7 +273,7 @@ module Ship
                     @order.tolocation = @tolocation.id
      
                     distance = @fromlocation.distance_from([@tolocation.latitude, @tolocation.longitude]).to_i
-                    @order.price = distance /20
+                    @order.price = distance /5
                 end
                 # @order.destination_id= params[:destination_id]
                 @order.user_id = current_user.id
@@ -304,6 +304,7 @@ module Ship
                     optional :receivertel, :type => String, :desc => "reciver telephone"
                     optional :receivemethod, :type => String, :desc => "reciver method"
                     optional :iscomplete, :type => Boolean, :desc => "order if complete"
+                    optional :receiveraddress, :type => String, :desc => "receiver address"
                     optional :paymentid, :type => String, :desc => "android order payment id"
                 end
                 put do
