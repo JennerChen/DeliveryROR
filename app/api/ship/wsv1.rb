@@ -311,7 +311,7 @@ module Ship
                     authenticate!
                     @order=find_order(params[:id])
                     if @order 
-                        if !user_iscustomer!
+                        if !user_iscustomer! || true
                             @order.price=params[:price] if params[:price] && current_user.role=="admin"
                             @order.carrier_id=params[:carrier_id] if params[:carrier_id] && User.find_by_id(params[:carrier_id])
                             @order.state=params[:state] if params[:state]
