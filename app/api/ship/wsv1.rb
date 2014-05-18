@@ -326,7 +326,9 @@ module Ship
                                 @payment.order_id = params[:id]
                                 @payment.status = "Completed"
                                 @payment.transcation_id = "Android Online: #{params[:paymentid]}"
+
                                 if @payment.save 
+                                   @order.state = "In_Stock"
                                    @order.paymentid = @payment.id
                                 end
                             end
