@@ -16,8 +16,10 @@
       <% else %>
       <%= f.label :fromlocation, 'your address' %><br />
       <%=  Location.find_by_id(@order.fromlocation).address %><br/>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{Location.find_by_id(@order.fromlocation).latitude}%2C#{Location.find_by_id(@order.fromlocation).longitude}" %>
       <%= f.label :tolocation, 'receiver address' %><br />
       <%=  Location.find_by_id(@order.tolocation).address %><br>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{Location.find_by_id(@order.tolocation).latitude}%2C#{Location.find_by_id(@order.tolocation).longitude}" %>
       <% end %>
       <br/>
 
